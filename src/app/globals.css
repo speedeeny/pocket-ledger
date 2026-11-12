@@ -1,0 +1,163 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Segoe UI", ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial,
+    sans-serif;
+}
+
+/* Colour tokens are set on :root by ThemeScript/dark class so every component
+   can read them without duplicating the palette in Tailwind config. */
+:root {
+  --bg: #f6f8fc;
+  --bg-deep: #eef2f9;
+  --card: #ffffff;
+  --card-soft: #fafbfe;
+  --border: #e4eaf4;
+  --border-strong: #cfd8e8;
+  --ink: #0f1b2e;
+  --ink-soft: #39465c;
+  --muted: #65748c;
+  --muted-light: #7c8aa3;
+  --track: #edf1f8;
+  --grid: #ebf0f7;
+  --nav: #0d1728;
+  --nav-hover: #16243a;
+  --nav-active: #1e3050;
+  --nav-text: #a9b7cd;
+  --nav-text-active: #ffffff;
+  --nav-muted: #5c6e8a;
+  --on-accent: #ffffff;
+  --heading-bg: #fafbfe;
+
+  --accent: #0da678;
+  --accent-dark: #0a8560;
+  --accent-soft: #e3f6ef;
+  --accent-glow: #16c08d;
+  --income: #0e9f6e;
+  --income-soft: #e4f7ee;
+  --expense: #de5340;
+  --expense-soft: #fdece8;
+  --warn: #c4860a;
+  --gold: #f0b03c;
+  --gold-soft: #fef5e3;
+  --shadow: 0 1px 2px rgba(15, 27, 46, 0.06), 0 8px 24px rgba(15, 27, 46, 0.06);
+}
+
+.dark {
+  --bg: #0e1622;
+  --bg-deep: #0a111b;
+  --card: #162130;
+  --card-soft: #1a2637;
+  --border: #22303f;
+  --border-strong: #2e4054;
+  --ink: #eaf0f8;
+  --ink-soft: #becbdc;
+  --muted: #8698af;
+  --muted-light: #6b7e96;
+  --track: #1e2b3c;
+  --grid: #1e2b3c;
+  --nav: #0a111b;
+  --nav-hover: #141f2e;
+  --nav-active: #1b2a3d;
+  --nav-text: #9fb0c6;
+  --nav-text-active: #ffffff;
+  --nav-muted: #5a6b82;
+  --on-accent: #05130e;
+  --heading-bg: #1a2637;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+/* Accent palettes */
+[data-palette="ocean"] {
+  --accent: #1c7ed6;
+  --accent-dark: #1663ad;
+  --accent-soft: #e4f0fc;
+  --accent-glow: #3d9bf0;
+}
+[data-palette="violet"] {
+  --accent: #7048e8;
+  --accent-dark: #5a36c4;
+  --accent-soft: #eee9fd;
+  --accent-glow: #8b68f0;
+}
+[data-palette="amber"] {
+  --accent: #c77c0a;
+  --accent-dark: #a36307;
+  --accent-soft: #fcf2df;
+  --accent-glow: #e09a2b;
+  --warn: #b0670a;
+  --gold: #e8a32c;
+  --gold-soft: #fbf1dc;
+}
+[data-palette="rose"] {
+  --accent: #d6457a;
+  --accent-dark: #b03361;
+  --accent-soft: #fce7f0;
+  --accent-glow: #e96a98;
+}
+
+/* In dark mode the soft tints behind cards must darken, not glow. */
+.dark {
+  --accent-soft: color-mix(in srgb, var(--accent) 14%, var(--card));
+  --income-soft: color-mix(in srgb, var(--income) 16%, var(--card));
+  --expense-soft: color-mix(in srgb, var(--expense) 16%, var(--card));
+  --gold-soft: color-mix(in srgb, var(--gold) 16%, var(--card));
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+* {
+  min-width: 0;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--accent) 28%, transparent);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* Slim, self-drawn scrollbar that matches the desktop app. */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-strong) transparent;
+}
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 999px;
+  border: 3px solid transparent;
+  background-clip: content-box;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--muted-light);
+  background-clip: content-box;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
